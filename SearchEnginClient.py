@@ -10,9 +10,9 @@ def startIndex(LL):
 def startSearch(keywords):
     query = {'keywords': keywords}
     r = requests.post('http://127.0.0.1:12000/search', data=query)
-    return r.text
+    return r.text + '\n'+ r.url
 
 
 if __name__ == '__main__':
     #while True:
-    print len(startSearch('韩国,明星').split('\n'))
+    print startSearch('韩国,明星')

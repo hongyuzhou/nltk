@@ -25,15 +25,16 @@ class IndexHandler(tornado.web.RequestHandler):
         index(_id,url,title,content)
 
     def get(self):
-        _id = long(self.get_query_argument('id', ''))
-        url = self.get_query_argument('url', '').encode('utf-8')
-        title = self.get_query_argument('title', '').encode('utf-8')
-        content = self.get_query_argument('content', '').encode('utf-8')
+        _id = long(self.get_argument('id', ''))
+        url = self.get_argument('url', '').encode('utf-8')
+        title = self.get_argument('title', '').encode('utf-8')
+        content = self.get_argument('content', '').encode('utf-8')
         index(_id,url,title,content)
 
 class SearchHandler(tornado.web.RequestHandler):
     def post(self):
         keywords = self.get_argument('keywords', '')
+        print 'post Function===========>>' + keywords
         print 'Search Result Info: '
         result = search(keywords)
         print result
@@ -41,9 +42,11 @@ class SearchHandler(tornado.web.RequestHandler):
         self.write(result)
 
     def get(self):
-        keywords = self.get_query_argument('keywords', '')
-        result = search(keywords)       
-        self.write(json.dumps(result))
+        keywords = self.get_argument('keywords', '')
+        print 'get Function ============>>' + keywords
+        result = search(keywords)
+        print result     
+        self.write(result)
 
 def make_app():
     return tornado.web.Application([
