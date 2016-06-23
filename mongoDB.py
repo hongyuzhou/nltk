@@ -27,19 +27,6 @@ def htmlPrecess(doc):
     preText = dTag.sub('', preText.encode('utf-8')).replace('\t', '').replace(' ', '').replace('&nbs','').replace('\r','')
     return preText
 
-def htmlPrecessUnicode(doc):
-    # delete all Tags and Js,Css's function)
-
-    dTag = re.compile(r'<[^>]+>', re.S)
-    dJs = re.compile(r'<script.*?/script>', re.S)
-    dJS = re.compile(r'<SCRIPT.*?/SCRIPT>', re.S)
-    dCss = re.compile(r'<style.*?/style>', re.S)
-    preText = dJs.sub('', doc)
-    preText = dJS.sub('', preText)
-    preText = dCss.sub('', preText)
-    preText = dTag.sub('', preText).replace('\t', '').replace('\n', '').replace('&nbs','')
-    return preText
-
 
 loop = 1
 
